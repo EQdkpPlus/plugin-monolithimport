@@ -52,9 +52,9 @@ class monolith_import extends page_generic {
 			
 			$strDKPTable = $this->in->get('log', '', 'raw');
 			$strLootHistory = $this->in->get('loothistory', '', 'raw');
-			
+			$strDKPHistory = $this->in->get('dkphistory', '', 'raw');
 
-			$mixedResult = $parser->parse($strDKPTable, $strLootHistory, $this->in->get('event', 0),  $this->in->get('itempool', 0));
+			$mixedResult = $parser->parse($strDKPTable, $strLootHistory, $strDKPHistory, $this->in->get('event', 0),  $this->in->get('itempool', 0));
 			
 			if (!$mixedResult){
 				//error

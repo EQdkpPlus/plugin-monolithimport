@@ -61,7 +61,12 @@ class monolithimport extends plugin_generic {
 		$this->add_menu('admin', $this->gen_admin_menu());
 	}
 	
-	
+	public function pre_install() {
+		//initialize config
+		$this->config->set('last_lootimport', 0, 'monolithimport');
+		$this->config->set('last_dkpimport', 0, 'monolithimport');
+	}
+
 	
 	public function gen_admin_menu() {
 		return array(array(
