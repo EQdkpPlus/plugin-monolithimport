@@ -1,3 +1,3 @@
-plugin-epgpimport
+plugin-monolithimport
 =================
-[![Build Status](https://travis-ci.org/EQdkpPlus/plugin-epgpimport.svg)](https://travis-ci.org/EQdkpPlus/plugin-epgpimport)
+[![Build Status](https://travis-ci.org/EQdkpPlus/plugin-monolithimport.svg)](https://travis-ci.org/EQdkpPlus/plugin-monolithimport)
