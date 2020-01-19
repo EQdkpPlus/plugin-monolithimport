@@ -50,7 +50,7 @@ class monolithimport extends plugin_generic {
 			'long_description'	=> $this->user->lang('monolithimport_long_desc'),
 			'homepage'			=> EQDKP_PROJECT_URL,
 			'manuallink'		=> 'https://wiki.eqdkp-plus.eu/',
-			'icon'				=> 'fa-fire',
+			'icon'				=> 'fa-list-alt',
 			)
 		);
 
@@ -70,7 +70,7 @@ class monolithimport extends plugin_generic {
 	
 	public function gen_admin_menu() {
 		return array(array(
-			'icon' => 'fa-fire',
+			'icon' => 'fa-list-alt',
 			'name' => $this->user->lang('monolithimport'),
 			1 => array(
 				'link' => 'plugins/' . $this->code . '/admin/import.php'.$this->SID,
