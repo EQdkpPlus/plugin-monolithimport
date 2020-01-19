@@ -1,0 +1,31 @@
+<div class="contentHeader">
+	<h1 class="contentTitle">{L_monolithimport_import}</h1>
+</div>
+
+
+<form method="post" action="{ACTION}" name="post">
+	<fieldset class="settings smallsettings">
+		<legend>{L_monolithimport_import}</legend>
+		<dl>
+			<dt><label>{L_event}</label></dt>
+			<dd>{EVENTS}</dd>
+		</dl>
+		<!-- IF not S_DKP_EASYMODE -->
+		<dl>
+			<dt><label>{L_itempool}</label></dt>
+			<dd>{ITEMPOOLS}</dd>
+		</dl>
+		<!-- ENDIF -->
+		<dl>
+			<dt><label>DKPTable.xml *</label></dt>
+			<dd><textarea name="log" rows="10" id="log" style="width: 99%" class="post" required></textarea></dd>
+		</dl>
+		<dl>
+			<dt><label>LootHistory.xml</label></dt>
+			<dd><textarea name="loothistory" rows="10" id="loothistory" style="width: 99%" class="post" ></textarea></dd>
+		</dl>
+		
+	</fieldset>
+	<button type="submit" name="insert"><i class="fa fa-check"></i>{L_submit}</button>
+	{CSRF_TOKEN}
+</form>
