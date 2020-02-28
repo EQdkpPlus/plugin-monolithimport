@@ -98,7 +98,6 @@ class monolith_import extends page_generic {
 		$this->tpl->assign_vars(array(
 			'EVENTS'			=> (new hdropdown('event', array('options' => $events)))->output(),
 			'ITEMPOOLS'			=> (new hdropdown('itempool', array('options' => $itempools)))->output(),
-			'S_LAYOUT_WARNING'  => ($this->pdh->get_eqdkp_base_layout($this->config->get('eqdkp_layout')) != 'monolith') ? true : false,
 		));
 
 		$this->core->set_vars(array(

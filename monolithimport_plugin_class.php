@@ -26,7 +26,7 @@ if ( !defined('EQDKP_INC') ) {
 class monolithimport extends plugin_generic {
 
 	public $vstatus = 'Stable';
-	public $version = '1.0.0';
+	public $version = '1.0.1';
 	
 	protected static $apiLevel = 23;
 	

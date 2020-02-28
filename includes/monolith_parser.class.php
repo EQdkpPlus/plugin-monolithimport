@@ -30,6 +30,10 @@ if(!class_exists('monolith_parser')) {
 		}
 		
 		public function parse($strDKPTable, $strLootHistory, $strDKPHistory, $intEventID, $intItempoolID){	
+			if($this->config->get('dkp_easymode')){
+				$intItempoolID = $this->pdh->get('event', 'def_itempool', array($intEventID));
+			}
+			
 			if ($objLog = simplexml_load_string($strDKPTable)){
 				//Build itemList
 				$blnRaidItemList = false;
@@ -80,12 +84,16 @@ if(!class_exists('monolith_parser')) {
 				//Adjustments
 				$intLastDKPImport = $this->config->get('last_dkpimport', 'monolithimport');
 				if(!$intLastDKPImport) $intLastDKPImport = 0;
+				
 				$intNewLastDKPImport = $intLastDKPImport;
 				
 				$objDKPHistory = simplexml_load_string($strDKPHistory);
 				foreach($objDKPHistory->historyentry as $objAdj){
 					$strPlayers = (string)$objAdj->playerstring;
 					$arrPlayers = explode(',', $strPlayers);
+					
+					$strValues = (string)$objAdj->dkp;
+					$arrValues = explode(',', $strValues);
 					
 					$fltValue = (float)$objAdj->dkp;
 					$time = (int)$objAdj->timestamp;
@@ -94,7 +102,7 @@ if(!class_exists('monolith_parser')) {
 					if($time > $intNewLastDKPImport) $intNewLastDKPImport = $time;
 					if($time <= $intLastDKPImport) continue;
 					
-					foreach($arrPlayers as $strPlayer){
+					foreach($arrPlayers as $k => $strPlayer){
 						if(!strlen($strPlayer)) continue;
 						
 						list($membername, $servername) = explode('-', $strPlayer);
@@ -109,15 +117,22 @@ if(!class_exists('monolith_parser')) {
 						$strServername = (isset($servername) && strlen($servername)) ? trim($servername) : $this->config->get('servername');
 						
 						$strFullMembername = $strMembername.'-'.unsanitize($strServername);
+						$strValue = (count($arrValues)>1) ? $arrValues[$k] : $fltValue;
+						
+						if(strpos($strValue, '%') !== false){
+							continue;
+						}
+						
+						$value = (float)$strValue;
 												
 							//create adjustment
-							$arrAdjustment[$fltValue][] = array(
-									'value' => $fltValue,
+							$arrAdjustment[$value.'__'.$strReason][] = array(
+									'value' => $value,
 									'member_name'=> $strFullMembername,
 									'reason'=> $strReason,
 							);
 							if(!isset($arrAdjMemberList[$strFullMembername])) $arrAdjMemberList[$strFullMembername] = 0;
-							$arrAdjMemberList[$strFullMembername] += $fltValue;
+							$arrAdjMemberList[$strFullMembername] += $value;
 					}
 					
 				}
@@ -171,15 +186,16 @@ if(!class_exists('monolith_parser')) {
 					
 					if ($floatAdjustement != 0){
 						//create adjustment
-						$arrAdjustment[$floatAdjustement][] = array(
+						$strReason =  'MonolithDKP Import '.$strCurrentTime;
+						$arrAdjustment[$floatAdjustement.'__'.$strReason][] = array(
 							'value' => $floatAdjustement,
 							'member'=> $intMemberID,
-							'reason'=> 'MonolithDKP Import '.$strCurrentTime,
+							'reason'=> $strReason,
 						);
 					}
 					
 					$arrMember[] = $intMemberID;
-				}								
+				}		
 				
 				//Create raid with value 0
 				$raid_upd = $this->pdh->put('raid', 'add_raid', array($intTime, $arrMember, $intEventID, 'MonolithDKP Import '.$strCurrentTime, 0));
@@ -188,9 +204,10 @@ if(!class_exists('monolith_parser')) {
 					//Add Adjustments
 					
 					foreach ($arrAdjustment as $val => $a){
-						if($val == 0) continue;
 						$arrMembers = array();
 						foreach($a as $adj){
+							if($adj['value'] == 0) continue;
+							
 							if(!isset($adj['member'])){
 								$arrMembername = explode("-", $adj['member_name']);
 								$strBuyerName = trim($arrMembername[0]);
@@ -203,7 +220,7 @@ if(!class_exists('monolith_parser')) {
 								$arrMembers[] = $adj['member'];	
 							}
 						}
-
+						
 						$adj_upd[] = $this->pdh->put('adjustment', 'add_adjustment', array($adj['value'], $adj['reason'], $arrMembers, $intEventID, $raid_upd, $intTime));
 					}
 
