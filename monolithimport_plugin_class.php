@@ -26,7 +26,7 @@ if ( !defined('EQDKP_INC') ) {
 class monolithimport extends plugin_generic {
 
 	public $vstatus = 'Stable';
-	public $version = '1.0.2';
+	public $version = '1.1.0';
 	
 	protected static $apiLevel = 23;
 	
@@ -76,7 +76,12 @@ class monolithimport extends plugin_generic {
 				'link' => 'plugins/' . $this->code . '/admin/import.php'.$this->SID,
 				'text' => $this->user->lang('monolithimport_import'),
 				'check' => 'a_monolithimport_import',
-				'icon' => 'fa-upload')
+				'icon' => 'fa-upload'),
+			2 => array(
+				'link' => 'plugins/' . $this->code . '/admin/export.php'.$this->SID,
+				'text' => $this->user->lang('monolithimport_export'),
+				'check' => 'a_monolithimport_import',
+				'icon' => 'fa-download')
 		));
 	}
 

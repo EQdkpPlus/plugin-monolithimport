@@ -30,15 +30,15 @@ if (!defined('EQDKP_INC')) {
 //Source-Language: german
 
 $lang = array( 
-	"monolithimport" => 'MonolithDKP-Import',
+	"monolithimport" => 'MonolithDKP Im- & Export',
 	"monolithimport_import" => 'Import MonolithDKP-Log',
-	"monolithimport_short_desc" => 'MonolithDKP-Importer',
-	"monolithimport_long_desc" => 'Import your MonolithDKP-Logs from the ingame-Addon',
+	"monolithimport_short_desc" => 'MonolithDKP Im- & Exporter',
+	"monolithimport_long_desc" => 'Import your MonolithDKP-Logs from the ingame-Addon & export DKPTable',
 	"monolithimport_error_nolog" => 'No MonolithDKP-Log given',
 	"monolithimport_error_wrongformat" => 'MonolithDKP-Log could not be imported, maybe it is damaged or has a wrong format.',
 	"monolithimport_success" => 'MonolithDKP-Log successfully imported.',
 	"monolithimport_error_more_mdkp4event" => 'MonolithDKP-Log could not be imported, because the selected event belongs to more than one MultiDKP-Pool.',
-	
+	'monolithimport_export' => 'Export MonolithDKP-Log',
 );
 
 ?>

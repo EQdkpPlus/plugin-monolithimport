@@ -20,13 +20,14 @@
  */
 
 	$lang = array(
-		'monolithimport' => 'MonolithDKP-Import',
+		'monolithimport' => 'MonolithDKP Im- und Export',
 		'monolithimport_import' => 'MonolithDKP-Logs importieren',
-		'monolithimport_short_desc' => 'MonolithDKP-Importer',
-		'monolithimport_long_desc' => 'Importiere MonolithDKP-Logs aus deinem Spiel',
+		'monolithimport_short_desc' => 'MonolithDKP Im- und Exporter',
+		'monolithimport_long_desc' => 'Importiere MonolithDKP-Logs aus deinem Spiel und exportiere die DKPTable',
 		'monolithimport_error_nolog' => 'Es wurde kein MonolithDKP-Log angegeben.',
 		'monolithimport_success' => 'Der MonolithDKP-Log wurde erfolgreich importiert.',
 		'monolithimport_error_more_mdkp4event' => 'Der MonolithDKP-Log konnte nicht importiert werden, da das ausgewählte Event mehr als einem MultiDKP-Pool zugeordnet ist.',
+		'monolithimport_export' => 'MonolithDKP-Logs exportieren',
 	);
 	
 
