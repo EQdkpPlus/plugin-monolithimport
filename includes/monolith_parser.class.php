@@ -65,6 +65,7 @@ if(!class_exists('monolith_parser')) {
 					$strGameID = intval($objLootItem->itemnumber);
 					$strItemname = (string)$objLootItem->itemname;
 					$floatValue = (float)$objLootItem->cost;
+					$floatValue = runden($floatValue);
 					$time = (int)$objLootItem->timestamp;
 					
 					if($time > $intNewLastLootImport) $intNewLastLootImport = $time;
@@ -124,6 +125,7 @@ if(!class_exists('monolith_parser')) {
 						}
 						
 						$value = (float)$strValue;
+						$value = runden($value);
 												
 							//create adjustment
 							$arrAdjustment[$value.'__'.$strReason][] = array(
@@ -188,7 +190,7 @@ if(!class_exists('monolith_parser')) {
 						//create adjustment
 						$strReason =  'MonolithDKP Import '.$strCurrentTime;
 						$arrAdjustment[$floatAdjustement.'__'.$strReason][] = array(
-							'value' => $floatAdjustement,
+							'value' => runden($floatAdjustement),
 							'member'=> $intMemberID,
 							'reason'=> $strReason,
 						);

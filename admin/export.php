@@ -57,9 +57,9 @@ class monolith_import extends page_generic {
 			$arrEntry['dkpentry:'.$arrPlayerData['id']] = array(
 					'player' => $arrPlayerData['name'],
 					'class' => strtoupper($this->game->get_name('classes', $arrPlayerData['class_id'], 'english')),
-					'dkp' => round($arrPoints['points_current']),
-					'lifetimegained' => round($arrPoints['points_earned']),
-					'lifetimespent' => round($arrPoints['points_spent']),
+					'dkp' => runden($arrPoints['points_current']),
+					'lifetimegained' => runden($arrPoints['points_earned']),
+					'lifetimespent' => runden($arrPoints['points_spent']),
 			);
 		}
 		
